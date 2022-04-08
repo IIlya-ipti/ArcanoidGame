@@ -1,0 +1,4 @@
+﻿  Arcanoid2.0.cpp
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\gameobjects.h(134): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.h(16): warning C4305: инициализация: усечение из "double" в "const float"
+  Arcanoid2.0.vcxproj -> C:\Users\Ilya\source\repos\Arcanoid2.0\Debug\Arcanoid2.0.exe
