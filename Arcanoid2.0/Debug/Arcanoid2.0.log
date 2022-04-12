@@ -1,4 +1,18 @@
-﻿  Arcanoid2.0.cpp
+﻿  Game.cpp
 c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\gameobjects.h(134): warning C4244: =: преобразование "double" в "float", возможна потеря данных
 c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.h(16): warning C4305: инициализация: усечение из "double" в "const float"
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(5): warning C4305: инициализация: усечение из "double" в "float"
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(30): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(4): warning C4101: time: неиспользованная локальная переменная
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(122): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(126): warning C4244: аргумент: преобразование "const double" в "unsigned int", возможна потеря данных
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(159): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
   Arcanoid2.0.vcxproj -> C:\Users\Ilya\source\repos\Arcanoid2.0\Debug\Arcanoid2.0.exe

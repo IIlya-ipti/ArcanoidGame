@@ -193,4 +193,13 @@ void Game::RUN() {
         // end the current frame
         window.display();
     }
+
+
+    // delete objects
+    for (size_t i = 0; i < objects.size(); i++) {
+        delete objects[i];
+    }
+    for (size_t i = 0; i < manyfolds.size(); i++) {
+        delete manyfolds[i];
+    }
 }
