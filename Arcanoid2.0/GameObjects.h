@@ -160,13 +160,13 @@ public:
     void setShow(bool a) {
         draw = a;
     }
-    bool isShow() {
+    bool isShow() const {
         return draw;
     }
-    virtual bool isPlatform() {
+    virtual bool isPlatform() const {
         return false;
     }
-    virtual bool isBall() {
+    virtual bool isBall() const  {
         return false;
     }
 };
@@ -180,7 +180,7 @@ public:
         };
         return false;
     }
-    bool isPlatform() {
+    bool isPlatform() const {
         return true;
     }
 };
@@ -202,19 +202,19 @@ public:
     void invY() {
         norm.y = norm.y * -1;
     }
-    sf::Vector2f getSpeed() {
+    sf::Vector2f getSpeed() const {
         return norm;
     }
     void setStick(bool val) {
         this->stick = val;
     }
-    bool isStick() {
+    bool isStick() const {
         return stick;
     }
-    bool isfloor() {
+    bool isfloor() const {
         return floor;
     }
-    bool isBall() {
+    bool isBall() const {
         return true;
     }
     void setfloor(bool floor) {
