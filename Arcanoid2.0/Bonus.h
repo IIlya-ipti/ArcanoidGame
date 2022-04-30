@@ -24,28 +24,33 @@ class BonusSize : public Bonus {
     void applyBonus();
 public:
     BonusSize(_path path, double x0, double y0);
+    ~BonusSize() {};
 };
 
 class BonusSpeed : public Bonus {
     void applyBonus();
 public:
     BonusSpeed(_path path, double x0, double y0);
+    ~BonusSpeed() {};
 };
 
 class BonusTrajectory : public Bonus {
     void applyBonus();
 public:
     BonusTrajectory(_path path, double x0, double y0);
+    ~BonusTrajectory() {};
 };
 
 class BonusSticking : public Bonus {
     void applyBonus();
 public:
     BonusSticking(_path path, double x0, double y0);
+    ~BonusSticking() {};
 };
 
 class BonusHealth : public Bonus {
     void applyBonus();
 public:
     BonusHealth(_path path, double x0, double y0);
+    ~BonusHealth() {};
 };

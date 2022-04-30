@@ -1,5 +1,27 @@
 ﻿  Arcanoid2.0.cpp
 c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.h(63): warning C4305: инициализация: усечение из "double" в "const float"
+  Blocks.cpp
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\blocks.cpp(41): warning C4305: *=: усечение из "double" в "T"
+          with
+          [
+              T=float
+          ]
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\blocks.cpp(42): warning C4305: *=: усечение из "double" в "T"
+          with
+          [
+              T=float
+          ]
+  Bonus.cpp
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\bonus.cpp(37): warning C4305: *=: усечение из "double" в "T"
+          with
+          [
+              T=float
+          ]
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\bonus.cpp(38): warning C4305: *=: усечение из "double" в "T"
+          with
+          [
+              T=float
+          ]
   Game.cpp
 c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.h(63): warning C4305: инициализация: усечение из "double" в "const float"
 c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(9): warning C4305: инициализация: усечение из "double" в "float"
