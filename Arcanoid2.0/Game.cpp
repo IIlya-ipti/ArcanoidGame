@@ -1,21 +1,25 @@
 #include "Game.h"
 
+
+using namespace std;
+
+
 void Game::SetObjects() {
     float time;
     float time_coeff = 3.4;
     ManyFold::setWindowAxis(XWindow, YWindow);
 
     // add platform
-    object* platform = new Platform(path_platform, XWindow / 2, YWindow - 100);
+    Platform* platform = new Platform(path_platform, XWindow / 2, YWindow - 100);
     objects.push_back(platform);
 
     // add ball
-    object* ball = new Ball(path_ball, XWindow / 2, YWindow - 140);
+    Ball* ball = new Ball(path_ball, XWindow / 2, YWindow - 140);
     objects.push_back(ball);
     ball->setScale({ 0.5,0.5 });
 
     // add interaction
-    manyfolds.push_back(new ManyFold(ball, platform));
+    manyfolds.push_back(new ManyFold((object*&)ball, (object*&)platform));
 
 
 
@@ -34,37 +38,40 @@ void Game::SetObjects() {
             {
             case SIZE:
 
-                bonus = new Bonus(path_bonus1, SIZE, i * path_block.weight_, j * path_block.hight_);
+                bonus = new BonusSize(path_bonus1, i * path_block.weight_, j * path_block.hight_);
                 // add bonus block
-                bl = new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_);
+                bl = new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus);
                 break;
             case SPEED:
 
-                bonus = new Bonus(path_bonus2, SPEED, i * path_block.weight_, j * path_block.hight_);
+                bonus = new BonusSpeed(path_bonus2, i * path_block.weight_, j * path_block.hight_);
                 // add bonus block
-                bl = new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_);
+                bl = new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus);
                 break;
 
             case STICKING:
 
-                bonus = new Bonus(path_bonus3, STICKING, i * path_block.weight_, j * path_block.hight_);
+                bonus = new BonusSticking(path_bonus3, i * path_block.weight_, j * path_block.hight_);
                 bonus->getSprite().setColor(sf::Color(25, 20, 25));
                 // add bonus block
-                bl = new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_);
+                bl = new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus);
                 break;
 
             case HEALTH:
-                bonus = new Bonus(path_bonus3, HEALTH, i * path_block.weight_, j * path_block.hight_);
+                bonus = new BonusHealth(path_bonus3, i * path_block.weight_, j * path_block.hight_);
                 bonus->getSprite().setColor(sf::Color(255, 255, 255));
                 // add bonus block
-                bl = new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_);
+                bl = new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus);
                 break;
 
             case TRAJECTORY:
 
-                bonus = new Bonus(path_bonus4, TRAJECTORY, i * path_block.weight_, j * path_block.hight_);
+                bonus = new BonusTrajectory(path_bonus4, i * path_block.weight_, j * path_block.hight_);
                 // add bonus block
-                bl = new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_);
+                bl = new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus);
+
+
+
                 break;
             case INVULNERABLE:
 
@@ -77,9 +84,9 @@ void Game::SetObjects() {
             case SPEEDBLOCK:
                 bonus = NULL;
                 // add bonus block
-                bl = new SpeedBlock(path_block, i * path_block.weight_, j * path_block.hight_);
-                ((SpeedBlock*)bl)->setBall((Ball*&)ball);
+                bl = new SpeedBlock(path_block, i * path_block.weight_, j * path_block.hight_,ball);
                 bl->getSprite().setColor(sf::Color(255, 100, 255));
+
                 break;
             default:
                 bonus = NULL;
@@ -90,17 +97,16 @@ void Game::SetObjects() {
 
             if (bonus != NULL) {
                 bonus->setScale({ 0.5,0.5 });
-                bonus->setBall((Ball*&)ball);
-                bonus->setPlatform((Platform*&)platform);
-                ((BlockBonus*)bl)->setBonus(bonus);
+                bonus->setBall(ball);
+                bonus->setPlatform(platform);
                 objects.push_back(bonus);
-                manyfolds.push_back(new ManyFold(platform, (object*&)bonus));
+                manyfolds.push_back(new ManyFold((object*&)platform, (object*&)bonus));
             }
 
 
             // add to arrays for processing
             objects.push_back(bl);
-            manyfolds.push_back(new ManyFold(ball, bl));
+            manyfolds.push_back(new ManyFold((object*&)ball,(object*&)bl));
 
         }
     }
@@ -108,8 +114,8 @@ void Game::SetObjects() {
 }
 void Game::RUN() {
 
-    Platform* platform = (Platform*)objects[0];
-    Ball* ball = (Ball*)objects[1];
+    object* platform = objects[0];
+    object* ball = objects[1];
 
     // output player score
     sf::Text points;
@@ -147,7 +153,7 @@ void Game::RUN() {
         while (window.pollEvent(event))
         {
             // "close requested" event: we close the window
-            Ball* circle = (Ball*)ball;
+            object* circle = ball;
             sf::Vector2f vec2 = platform->getSprite().getPosition();
             sf::Vector2f vec_ball = ball->getSprite().getPosition() - vec2;
             switch (event.type)
@@ -195,11 +201,13 @@ void Game::RUN() {
     }
 
 
+    for (size_t i = 0; i < manyfolds.size(); i++) {
+        delete manyfolds[i];
+    }
+
     // delete objects
     for (size_t i = 0; i < objects.size(); i++) {
         delete objects[i];
     }
-    for (size_t i = 0; i < manyfolds.size(); i++) {
-        delete manyfolds[i];
-    }
+
 }

@@ -140,15 +140,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Arcanoid2.0.cpp" />
+    <ClCompile Include="Blocks.cpp" />
+    <ClCompile Include="Bonus.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObjects.cpp" />
+    <ClCompile Include="ManyFold.cpp" />
+    <ClCompile Include="Object.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Blocks.h" />
+    <ClInclude Include="Bonus.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObjects.h" />
+    <ClInclude Include="ManyFold.h" />
+    <ClInclude Include="Object.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
