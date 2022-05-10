@@ -15,8 +15,8 @@ BlockBonus::BlockBonus(_path path, double x0, double y0, std::shared_ptr<Bonus>&
     this->bonus->setShow(false);
 }
 void BlockBonus::setBonus(std::shared_ptr<Bonus>& bonus) {
-    this->bonus = std::move(bonus);
-    bonus->setShow(false);
+    this->bonus = bonus;
+    this->bonus->setShow(false);
 
 }
 bool BlockBonus::intersect(ManyFold* collis) {

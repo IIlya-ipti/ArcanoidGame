@@ -1,4 +1,15 @@
-﻿  Game.cpp
+﻿  Blocks.cpp
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\blocks.cpp(41): warning C4305: *=: усечение из "double" в "T"
+          with
+          [
+              T=float
+          ]
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\blocks.cpp(42): warning C4305: *=: усечение из "double" в "T"
+          with
+          [
+              T=float
+          ]
+  Game.cpp
 c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.h(63): warning C4305: инициализация: усечение из "double" в "const float"
 c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(9): warning C4305: инициализация: усечение из "double" в "float"
 c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(35): warning C4244: =: преобразование "double" в "int", возможна потеря данных
@@ -16,4 +27,5 @@ c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(158): warning C4244:
           ]
 c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(179): warning C4018: <: несоответствие типов со знаком и без знака
 c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(186): warning C4018: <: несоответствие типов со знаком и без знака
+  Создание кода...
   Arcanoid2.0.vcxproj -> C:\Users\Ilya\source\repos\Arcanoid2.0\Debug\Arcanoid2.0.exe
