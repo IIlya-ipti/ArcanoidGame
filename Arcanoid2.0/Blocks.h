@@ -13,11 +13,11 @@ public:
     virtual bool intersect(ManyFold* collis);
 };
 class BlockBonus : public Block {
-    Bonus* bonus = NULL;
+    std::shared_ptr<Bonus> bonus = NULL;
 public:
-    BlockBonus(_path path, double x0, double y0, Bonus* bonus);;
+    BlockBonus(_path path, double x0, double y0, std::shared_ptr<Bonus>& bonus);
     ~BlockBonus() {};
-    void setBonus(Bonus*& bonus);
+    void setBonus(std::shared_ptr<Bonus>& bonus);
     bool intersect(ManyFold* collis);
 };
 class invulnerableBlock : public Block {
@@ -28,9 +28,9 @@ public:
 
 };
 class SpeedBlock :public Block {
-    object* ball;
+    std::shared_ptr <Ball> ball;
 public:
-    SpeedBlock(_path path, double x0, double y0, object* ball);;
+    SpeedBlock(_path path, double x0, double y0, std::shared_ptr <Ball>& ball);
     ~SpeedBlock() {};
     bool intersect(ManyFold* collis);
 };

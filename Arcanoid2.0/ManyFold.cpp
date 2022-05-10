@@ -86,9 +86,9 @@ void ManyFold::setWindowAxis(double weight, double height) {
 int ManyFold::getPlayerPoints() {
     return PlayerScores;
 }
-ManyFold::ManyFold(object*& obj1, object*& obj2) {
-    this->obj1 = obj1;
-    this->obj2 = obj2;
+ManyFold::ManyFold(std::shared_ptr <object> obj1, std::shared_ptr <object> obj2) {
+    this->obj1 = std::move(obj1);
+    this->obj2 = std::move(obj2);
 }
 void ManyFold::setTime(double t) {
     this->time = t;
@@ -110,7 +110,7 @@ bool ManyFold::ApplyImpulseBonus() {
     }
     return false;
 }
-bool intersects(object* ob1, object* ob2)
+bool intersects(std::shared_ptr<object> ob1, std::shared_ptr<object> ob2)
 {
     if (ob1->getSprite().getGlobalBounds().intersects(ob2->getSprite().getGlobalBounds())) {
         return true;

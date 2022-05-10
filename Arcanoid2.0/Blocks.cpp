@@ -10,12 +10,12 @@ bool Block::intersect(ManyFold* collis) {
     }
     return false;
 }
-BlockBonus::BlockBonus(_path path, double x0, double y0, Bonus* bonus) :Block(path, x0, y0) {
+BlockBonus::BlockBonus(_path path, double x0, double y0, std::shared_ptr<Bonus>& bonus) :Block(path, x0, y0) {
     this->bonus = bonus;
-    bonus->setShow(false);
+    this->bonus->setShow(false);
 }
-void BlockBonus::setBonus(Bonus*& bonus) {
-    this->bonus = bonus;
+void BlockBonus::setBonus(std::shared_ptr<Bonus>& bonus) {
+    this->bonus = std::move(bonus);
     bonus->setShow(false);
 
 }
@@ -32,7 +32,7 @@ bool BlockBonus::intersect(ManyFold* collis) {
     }
     return false;
 }
-SpeedBlock::SpeedBlock(_path path, double x0, double y0, object* ball) : Block(path, x0, y0) {
+SpeedBlock::SpeedBlock(_path path, double x0, double y0, std::shared_ptr <Ball>& ball) : Block(path, x0, y0) {
     this->ball = ball;
 }
 bool SpeedBlock::intersect(ManyFold* collis) {

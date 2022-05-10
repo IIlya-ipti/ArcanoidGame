@@ -61,8 +61,8 @@ class Game {
     const int xNumBlocks = 10;
     const int yNumBlocks = 10;
     const float time_coeff = 3.4; // multiply time 
-    std::vector<object*> objects;     // run objects
-    std::vector<ManyFold*> manyfolds; // solve collisions
+    std::vector<std::shared_ptr<object>> objects;     // run objects
+    std::vector<std::unique_ptr<ManyFold>> manyfolds; // solve collisions
 public:
     void SetObjects();
     void RUN();

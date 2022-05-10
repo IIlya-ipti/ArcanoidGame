@@ -7,13 +7,13 @@
 class Bonus : public object {
 protected:
     sf::Vector2f norm = { 0,1 };
-    Ball* ball;
-    Platform* platform;
+    std::shared_ptr<Ball> ball;
+    std::shared_ptr<Platform> platform;
 public:
     Bonus(_path path, double x0, double y0);
     virtual ~Bonus() {};
-    void setBall(Ball* ball);
-    void setPlatform(Platform* platform);
+    void setBall(std::shared_ptr<Ball>& ball);
+    void setPlatform(std::shared_ptr<Platform>& platform);
     void run(float t);
     virtual void applyBonus() = 0;
     // in ManyFold

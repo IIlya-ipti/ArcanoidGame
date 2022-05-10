@@ -10,10 +10,10 @@ bool Bonus::intersect(ManyFold* collis) {
 }
 Bonus::Bonus(_path path, double x0, double y0) : object(path, x0, y0) {
 }
-void Bonus::setBall(Ball* ball) {
+void Bonus::setBall(std::shared_ptr<Ball> &ball) {
     this->ball = ball;
 }
-void Bonus::setPlatform(Platform* platform) {
+void Bonus::setPlatform(std::shared_ptr<Platform>& platform) {
     this->platform = platform;
 }
 

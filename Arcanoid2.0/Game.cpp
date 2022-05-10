@@ -10,22 +10,23 @@ void Game::SetObjects() {
     ManyFold::setWindowAxis(XWindow, YWindow);
 
     // add platform
-    Platform* platform = new Platform(path_platform, XWindow / 2, YWindow - 100);
+    std::shared_ptr <Platform> platform(new Platform(path_platform, XWindow / 2, YWindow - 100));
     objects.push_back(platform);
 
     // add ball
-    Ball* ball = new Ball(path_ball, XWindow / 2, YWindow - 140);
+    std::shared_ptr <Ball> ball(new Ball(path_ball, XWindow / 2, YWindow - 140));
     objects.push_back(ball);
     ball->setScale({ 0.5,0.5 });
 
-    // add interaction
-    manyfolds.push_back(new ManyFold((object*&)ball, (object*&)platform));
+    // add intersection
+    manyfolds.push_back(std::unique_ptr<ManyFold>(new ManyFold(std::dynamic_pointer_cast<object>(ball), 
+        std::dynamic_pointer_cast<object>(platform))));
 
 
 
     //add blocks and bonuses
-    Bonus* bonus;
-    object* bl;
+    std::shared_ptr <Bonus> bonus = NULL;
+    std::shared_ptr <object> bl = NULL;
     int rand_bonus;
 
 
@@ -37,38 +38,38 @@ void Game::SetObjects() {
             switch (rand_bonus)
             {
             case SIZE:
-
-                bonus = new BonusSize(path_bonus1, i * path_block.weight_, j * path_block.hight_);
+                
+                bonus.reset(new BonusSize(path_bonus1, i * path_block.weight_, j * path_block.hight_));
                 // add bonus block
-                bl = new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus);
+                bl.reset(new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus));
                 break;
             case SPEED:
 
-                bonus = new BonusSpeed(path_bonus2, i * path_block.weight_, j * path_block.hight_);
+                bonus.reset(new BonusSpeed(path_bonus2, i * path_block.weight_, j * path_block.hight_));
                 // add bonus block
-                bl = new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus);
+                bl.reset(new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus));
                 break;
 
             case STICKING:
 
-                bonus = new BonusSticking(path_bonus3, i * path_block.weight_, j * path_block.hight_);
+                bonus.reset(new BonusSticking(path_bonus3, i * path_block.weight_, j * path_block.hight_));
                 bonus->getSprite().setColor(sf::Color(25, 20, 25));
                 // add bonus block
-                bl = new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus);
+                bl.reset(new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus));
                 break;
 
             case HEALTH:
-                bonus = new BonusHealth(path_bonus3, i * path_block.weight_, j * path_block.hight_);
+                bonus.reset(new BonusHealth(path_bonus3, i * path_block.weight_, j * path_block.hight_));
                 bonus->getSprite().setColor(sf::Color(255, 255, 255));
                 // add bonus block
-                bl = new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus);
+                bl.reset(new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus));
                 break;
 
             case TRAJECTORY:
 
-                bonus = new BonusTrajectory(path_bonus4, i * path_block.weight_, j * path_block.hight_);
+                bonus.reset(new BonusTrajectory(path_bonus4, i * path_block.weight_, j * path_block.hight_));
                 // add bonus block
-                bl = new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus);
+                bl.reset(new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus));
 
 
 
@@ -77,21 +78,21 @@ void Game::SetObjects() {
 
                 bonus = NULL;
                 // add bonus block
-                bl = new invulnerableBlock(path_block, i * path_block.weight_, j * path_block.hight_);
+                bl.reset(new invulnerableBlock(path_block, i * path_block.weight_, j * path_block.hight_));
                 bl->getSprite().setColor(sf::Color(25, 25, 255));
                 break;
 
             case SPEEDBLOCK:
                 bonus = NULL;
                 // add bonus block
-                bl = new SpeedBlock(path_block, i * path_block.weight_, j * path_block.hight_,ball);
+                bl.reset(new SpeedBlock(path_block, i * path_block.weight_, j * path_block.hight_,ball));
                 bl->getSprite().setColor(sf::Color(255, 100, 255));
 
                 break;
             default:
                 bonus = NULL;
                 // add bonus block
-                bl = new Block(path_block, i * path_block.weight_, j * path_block.hight_);
+                bl.reset(new Block(path_block, i * path_block.weight_, j * path_block.hight_));
                 break;
             }
 
@@ -100,13 +101,12 @@ void Game::SetObjects() {
                 bonus->setBall(ball);
                 bonus->setPlatform(platform);
                 objects.push_back(bonus);
-                manyfolds.push_back(new ManyFold((object*&)platform, (object*&)bonus));
+                manyfolds.push_back(std::unique_ptr <ManyFold>(new ManyFold(platform, bonus)));
             }
-
 
             // add to arrays for processing
             objects.push_back(bl);
-            manyfolds.push_back(new ManyFold((object*&)ball,(object*&)bl));
+            manyfolds.push_back(std::unique_ptr <ManyFold>(new ManyFold(ball,bl)));
 
         }
     }
@@ -114,8 +114,8 @@ void Game::SetObjects() {
 }
 void Game::RUN() {
 
-    object* platform = objects[0];
-    object* ball = objects[1];
+    std::shared_ptr <object> platform = objects[0];
+    std::shared_ptr <object> ball = objects[1];
 
     // output player score
     sf::Text points;
@@ -153,7 +153,7 @@ void Game::RUN() {
         while (window.pollEvent(event))
         {
             // "close requested" event: we close the window
-            object* circle = ball;
+            std::shared_ptr <object> circle = ball;
             sf::Vector2f vec2 = platform->getSprite().getPosition();
             sf::Vector2f vec_ball = ball->getSprite().getPosition() - vec2;
             switch (event.type)
@@ -183,17 +183,19 @@ void Game::RUN() {
         // clear the window with black color
         window.clear(sf::Color::Blue);
 
-        for (object* ob : objects) {
-            if (ob->isShow()) {
-                ob->run(time);
-                window.draw(ob->getSprite());
+        for (int i = 0; i < objects.size();i++) {
+            if (objects[i]->isShow()) {
+                objects[i]->run(time);
+                window.draw(objects[i]->getSprite());
             }
 
         }
-        for (ManyFold* fold : manyfolds) {
-            fold->setTime(time);
-            fold->apply();
+        for (int i = 0; i < manyfolds.size();i++) {
+            manyfolds[i]->setTime(time);
+            manyfolds[i]->apply();
         }
+
+
         points.setString(to_string(ManyFold::getPlayerPoints()));
         window.draw(points);
         // end the current frame
@@ -201,13 +203,5 @@ void Game::RUN() {
     }
 
 
-    for (size_t i = 0; i < manyfolds.size(); i++) {
-        delete manyfolds[i];
-    }
-
-    // delete objects
-    for (size_t i = 0; i < objects.size(); i++) {
-        delete objects[i];
-    }
 
 }
