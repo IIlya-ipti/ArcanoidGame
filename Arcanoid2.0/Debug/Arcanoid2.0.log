@@ -3,17 +3,17 @@ c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.h(63): warning C4305: и
 c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(9): warning C4305: инициализация: усечение из "double" в "float"
 c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(35): warning C4244: =: преобразование "double" в "int", возможна потеря данных
 c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(8): warning C4101: time: неиспользованная локальная переменная
-c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(129): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(123): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(133): warning C4244: аргумент: преобразование "const double" в "unsigned int", возможна потеря данных
-c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(166): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(127): warning C4244: аргумент: преобразование "const double" в "unsigned int", возможна потеря данных
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(158): warning C4244: =: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(187): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(194): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(179): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\ilya\source\repos\arcanoid2.0\arcanoid2.0\game.cpp(186): warning C4018: <: несоответствие типов со знаком и без знака
   Arcanoid2.0.vcxproj -> C:\Users\Ilya\source\repos\Arcanoid2.0\Debug\Arcanoid2.0.exe

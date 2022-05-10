@@ -40,13 +40,13 @@ void Game::SetObjects() {
             case SIZE:
                 
                 bonus.reset(new BonusSize(path_bonus1, i * path_block.weight_, j * path_block.hight_));
-                // add bonus block
+            
                 bl.reset(new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus));
                 break;
             case SPEED:
 
                 bonus.reset(new BonusSpeed(path_bonus2, i * path_block.weight_, j * path_block.hight_));
-                // add bonus block
+        
                 bl.reset(new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus));
                 break;
 
@@ -54,21 +54,19 @@ void Game::SetObjects() {
 
                 bonus.reset(new BonusSticking(path_bonus3, i * path_block.weight_, j * path_block.hight_));
                 bonus->getSprite().setColor(sf::Color(25, 20, 25));
-                // add bonus block
+        
                 bl.reset(new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus));
                 break;
 
             case HEALTH:
                 bonus.reset(new BonusHealth(path_bonus3, i * path_block.weight_, j * path_block.hight_));
                 bonus->getSprite().setColor(sf::Color(255, 255, 255));
-                // add bonus block
                 bl.reset(new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus));
                 break;
 
             case TRAJECTORY:
 
                 bonus.reset(new BonusTrajectory(path_bonus4, i * path_block.weight_, j * path_block.hight_));
-                // add bonus block
                 bl.reset(new BlockBonus(path_block, i * path_block.weight_, j * path_block.hight_,bonus));
 
 
@@ -77,21 +75,18 @@ void Game::SetObjects() {
             case INVULNERABLE:
 
                 bonus = NULL;
-                // add bonus block
                 bl.reset(new invulnerableBlock(path_block, i * path_block.weight_, j * path_block.hight_));
                 bl->getSprite().setColor(sf::Color(25, 25, 255));
                 break;
 
             case SPEEDBLOCK:
                 bonus = NULL;
-                // add bonus block
                 bl.reset(new SpeedBlock(path_block, i * path_block.weight_, j * path_block.hight_,ball));
                 bl->getSprite().setColor(sf::Color(255, 100, 255));
 
                 break;
             default:
                 bonus = NULL;
-                // add bonus block
                 bl.reset(new Block(path_block, i * path_block.weight_, j * path_block.hight_));
                 break;
             }
@@ -148,12 +143,10 @@ void Game::RUN() {
 
 
 
-        // check all the window's events that were triggered since the last iteration of the loop
+
         sf::Event event;
         while (window.pollEvent(event))
         {
-            // "close requested" event: we close the window
-            std::shared_ptr <object> circle = ball;
             sf::Vector2f vec2 = platform->getSprite().getPosition();
             sf::Vector2f vec_ball = ball->getSprite().getPosition() - vec2;
             switch (event.type)
@@ -164,13 +157,13 @@ void Game::RUN() {
             case sf::Event::MouseMoved:
                 vec2.x = event.mouseMove.x;
                 platform->getSprite().setPosition(vec2);
-                if (circle->getSpeed().x == 0 && circle->getSpeed().y == 0) {
+                if (ball->getSpeed().x == 0 && ball->getSpeed().y == 0) {
                     ball->getSprite().setPosition(vec2 + vec_ball);
                 }
                 break;
             case sf::Event::MouseButtonPressed:
-                if (circle->getSpeed() == sf::Vector2f({ 0,0 })) {
-                    circle->setSpeed({ 1,1 });
+                if (ball->getSpeed() == sf::Vector2f({ 0,0 })) {
+                    ball->setSpeed({ 1,1 });
                 }
                 break;
 
@@ -180,7 +173,7 @@ void Game::RUN() {
 
         }
 
-        // clear the window with black color
+        // clear the window with blue color
         window.clear(sf::Color::Blue);
 
         for (int i = 0; i < objects.size();i++) {
@@ -198,7 +191,6 @@ void Game::RUN() {
 
         points.setString(to_string(ManyFold::getPlayerPoints()));
         window.draw(points);
-        // end the current frame
         window.display();
     }
 
